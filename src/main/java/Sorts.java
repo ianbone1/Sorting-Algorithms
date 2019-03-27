@@ -30,7 +30,7 @@ public class Sorts {
     }
 
     //QuickSort Algorithm
-    public static ArrayList<Integer> quickSort(ArrayList<Integer> list){
+    private  static ArrayList<Integer> quickSort(ArrayList<Integer> list){
 
         if (list.size() <= 1) return list; // Already sorted
 
@@ -56,25 +56,64 @@ public class Sorts {
         return lesserThanPivot;
     }
 
+    // Merge Sort
+    private static ArrayList<Integer> merge(ArrayList<Integer> leftHalf, ArrayList<Integer> rightHalf) {
+        ArrayList<Integer> sorted = new ArrayList<Integer>();
+
+        while ((leftHalf.size() > 0) && (rightHalf.size() > 0)) {
+            if (leftHalf.get(0) > rightHalf.get(0)) {
+                sorted.add(rightHalf.remove(0));
+            } else {
+                sorted.add(leftHalf.remove(0));
+            }
+        }
+
+        while (leftHalf.size() > 0) {
+            sorted.add(leftHalf.remove(0));
+        }
+
+        while (rightHalf.size() > 0) {
+            sorted.add(rightHalf.remove(0));
+        }
+
+        return sorted;
+    }
+
+    public static ArrayList<Integer> mergeSort(ArrayList<Integer> sortMe) {
+        if (sortMe.size() == 1) return sortMe;
+        int length=sortMe.size();
+        int middle = length/2;
+
+        ArrayList<Integer> leftHalf = new ArrayList<Integer>(sortMe.subList(0, middle));
+        ArrayList<Integer> rightHalf = new ArrayList<Integer>(sortMe.subList(middle, length));
+
+        leftHalf = mergeSort(leftHalf);
+        rightHalf = mergeSort(rightHalf);
+
+        return merge(leftHalf, rightHalf);
+    }
+
     public static void main(String[] args) {
+
+        int listSize = 1000;
         ArrayList<Integer> list;
         Random rand = new Random();
-        int n = rand.nextInt(1000);
-        list = new ArrayList<Integer>();
-        for (int i=0; i<1000; i++){
-            list.add(rand.nextInt(1000));
+        list = new ArrayList<>();
+        for (int i=0; i<listSize; i++){
+            list.add(rand.nextInt(listSize));
         }
 
 //        System.out.println(list);
+        System.out.println("List size in: " + list.size());
         LocalDateTime startTime = LocalDateTime.now();
         //list=bubbleSort(list);
-        list=quickSort(list);
+        //list=quickSort(list);
+        list=mergeSort(list);
         LocalDateTime endTime = LocalDateTime.now();
         System.out.println("Start time: " + startTime);
         System.out.println("End time  : " + endTime);
         System.out.println("Duration  : " + Duration.between(startTime, endTime).toMillis());
-        System.out.println(list.size());
-//        System.out.println(list);
+        System.out.println("List size out: "+ list.size());
     }
 
 
