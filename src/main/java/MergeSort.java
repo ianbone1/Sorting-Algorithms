@@ -2,7 +2,6 @@ import java.util.ArrayList;
 
 public class MergeSort {
 
-
     // Merge Sort
     private static ArrayList<Integer> merge(ArrayList<Integer> leftHalf, ArrayList<Integer> rightHalf) {
         ArrayList<Integer> sorted = new ArrayList<Integer>();
