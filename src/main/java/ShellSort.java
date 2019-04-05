@@ -2,8 +2,14 @@ import java.util.ArrayList;
 
 public class ShellSort {
 
+    private ArrayList<Integer> sortList;
+
+    public ShellSort(ArrayList<Integer> unsortedList){
+        this.sortList = unsortedList;
+    }
+
     // Shell Sort
-    private static ArrayList<Integer> gapInsertionSort(ArrayList<Integer> unsortedList, int start, int gap){
+    private ArrayList<Integer> gapInsertionSort(ArrayList<Integer> unsortedList, int start, int gap){
         for (int i=(start+gap); i<unsortedList.size(); i+=gap){
             int currentValue = unsortedList.get(i);
             int position = i;
@@ -19,7 +25,7 @@ public class ShellSort {
         return unsortedList;
     }
 
-    public  static ArrayList<Integer> shellSort(ArrayList<Integer> unsortedList){
+    private ArrayList<Integer> shellSort(ArrayList<Integer> unsortedList){
         int sublistCount = unsortedList.size()/2;
 
         while (sublistCount > 0){
@@ -29,5 +35,9 @@ public class ShellSort {
             sublistCount = sublistCount/2;
         }
         return unsortedList;
+    }
+
+    public void sort(){
+        this.shellSort(this.sortList);
     }
 }

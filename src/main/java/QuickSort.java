@@ -2,12 +2,18 @@ import java.util.ArrayList;
 
 public class QuickSort {
 
-    public QuickSort() {
+    private ArrayList<Integer> sortList;
 
+    public QuickSort(ArrayList<Integer> unsortedList) {
+        this.sortList = unsortedList;
+    }
+
+    public ArrayList<Integer> getSortList() {
+        return sortList;
     }
 
     //QuickSort Algorithm
-    public static ArrayList<Integer> quickSort(ArrayList<Integer> list){
+    private ArrayList<Integer> doSort(ArrayList<Integer> list){
 
         if (list.size() <= 1) return list; // Already sorted
 
@@ -24,12 +30,18 @@ public class QuickSort {
                 greaterThanPivot.add(list.get(index));
         }
 
-        lesserThanPivot = quickSort(lesserThanPivot);
-        greaterThanPivot = quickSort(greaterThanPivot);
+        lesserThanPivot = this.doSort(lesserThanPivot);
+        greaterThanPivot = this.doSort(greaterThanPivot);
 
         lesserThanPivot.add(pivot);
         lesserThanPivot.addAll(greaterThanPivot);
 
         return lesserThanPivot;
     }
+
+    public void sort(){
+        this.doSort(this.sortList);
+    }
+
+
 }

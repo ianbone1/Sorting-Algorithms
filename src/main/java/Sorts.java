@@ -8,42 +8,46 @@ public class Sorts {
     public static void main(String[] args) {
 
         int listSize = 1000;
-        ArrayList<Integer> list= new ArrayList<>();
-        ArrayList<Integer> bubbleList = new ArrayList<>();
-        ArrayList<Integer> quickList = new ArrayList<>();
-        ArrayList<Integer> mergeList = new ArrayList<>();
-        ArrayList<Integer> shellList = new ArrayList<>();
-
+        //build a random list
+        ArrayList<Integer> list1 = new ArrayList<>();
+        ArrayList<Integer> list2 = new ArrayList<>();
+        ArrayList<Integer> list3 = new ArrayList<>();
+        ArrayList<Integer> list4 = new ArrayList<>();
         Random rand = new Random();
         int nextNum;
         for (int i=0; i<listSize; i++){
             nextNum=rand.nextInt(listSize);
-            list.add(nextNum);
-            bubbleList.add(nextNum);
-            quickList.add(nextNum);
-            mergeList.add(nextNum);
-            shellList.add(nextNum);
+            list1.add(nextNum);
+            list2.add(nextNum);
+            list3.add(nextNum);
+            list4.add(nextNum);
         }
+
+        //setup sort lists
+        BubbleSort bubbleList = new BubbleSort(list1);
+        QuickSort quickList   = new QuickSort(list2);
+        MergeSort mergeList   = new MergeSort(list3);
+        ShellSort shellList   = new ShellSort(list4);
+
 
         String sort1 = "Quick sort";
         String sort2 = "Shell Sort";
         String sort3 = "Bubble Sort";
         String sort4 = "Merge Sort";
 
-        System.out.println("List size to sort is: " + list.size());
+        System.out.println("List size to sort is: " + list1.size());
         LocalDateTime startTime = LocalDateTime.now();
 
-        quickList=QuickSort.quickSort(quickList);
+        quickList.sort();
         LocalDateTime sort1stop = LocalDateTime.now();
 
-        shellList=ShellSort.shellSort(shellList);
+        shellList.sort();
         LocalDateTime sort2stop = LocalDateTime.now();
 
-        bubbleList= BubbleSort.bubbleSort(bubbleList);
+        bubbleList.sort();
         LocalDateTime sort3stop = LocalDateTime.now();
 
-        mergeList=MergeSort.mergeSort(mergeList);
-
+        mergeList.sort();
         LocalDateTime sort4stop = LocalDateTime.now();
 
         System.out.println("Start time: " + startTime);
